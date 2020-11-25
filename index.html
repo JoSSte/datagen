@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="script/datagen.js"></script>
+    <link href="datagen.css" rel="stylesheet" type="text/css">
+    <title>MeasureDownload</title>
+</head>
+
+<body>
+    <h1>File generator and download timer</h1>
+    <fieldset>
+        <label for="length">File Size in bytes</label>
+        <input disabled type="number" min="0" max="5000000" id="length" value="20971520" step="1024"
+            onchange="updateBytes(this)">
+
+        <label for="lengthKB">File Size in kilobytes</label>
+        <input type="number" min="0" max="5000000" id="lengthKB" value="20480" step="1024" onchange="updateBytes(this)">
+
+        <label for="lengthMB">File Size in megabytes</label>
+        <input type="number" min="0" max="5000000" id="lengthMB" value="20" step="1" onchange="updateBytes(this)">
+        <br>
+        <button onclick="getFile('binary')">Binary file</button>
+        <br>
+        <button onclick="getFile('text')">Text file</button>
+    </fieldset>
+    <progress id="progressBar" value=0 min=0 max=100></progress>
+
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Bytes</th>
+                <th>Time taken</th>
+                <th colspan=3>Speed</th>
+            </tr>
+        </thead>
+        <tbody id="resultsTBody">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
