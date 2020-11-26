@@ -3,19 +3,57 @@ body {
 	background: #ddd5e2;
 }
 
-label {
-    color: #326691;
-    display: block;
-    width: 150px;
+.container-column {
+	flex-direction: column;
+	margin: 10px auto;	
 }
 
+.input-container {
+	display: flex;
+	margin: 0.2em;
+}
 
+label {
+	color: #326691;
+	flex-grow: 2;
+}
 
+input,button{
+	padding: 0.2em;
+	border: 0.1em solid black;
+	border-radius: 0.3em;
+}
 
 progress {
-	width: 100%;
+	width: 250px;
 	height: 14px;
-	margin: 10px auto;
 	display: block;
-	
+	margin: 10px auto;	
+}
+
+#resultsTable{
+	margin: 10px auto;	
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+#resultsTable, #resultsTable  th, #resultsTable td{
+	border: 0.1em solid;
+	border-collapse: collapse;
+}
+
+#resultsTable td, th {
+    padding: 0.2em;
+}
+
+#resultsTable tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+#resultsTable tbody tr:nth-child(even) {
+    background-color: rgb(230, 230, 230);
+}
+
+#resultsTable tbody tr:hover {
+    background-color: rgba(119, 255, 149, 0.35);
 }

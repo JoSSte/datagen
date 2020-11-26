@@ -4,26 +4,33 @@
 <head>
     <script src="script/datagen.js"></script>
     <link href="datagen.css" rel="stylesheet" type="text/css">
-    <title>MeasureDownload</title>
+    <title>File download timer</title>
 </head>
 
 <body>
-    <h1>File generator and download timer</h1>
-    <fieldset>
-        <label for="length">File Size in bytes</label>
-        <input disabled type="number" min="0" max="5000000" id="length" value="20971520" step="1024"
-            onchange="updateBytes(this)">
-
-        <label for="lengthKB">File Size in kilobytes</label>
-        <input type="number" min="0" max="5000000" id="lengthKB" value="20480" step="1024" onchange="updateBytes(this)">
-
-        <label for="lengthMB">File Size in megabytes</label>
-        <input type="number" min="0" max="5000000" id="lengthMB" value="20" step="1" onchange="updateBytes(this)">
-        <br>
-        <button onclick="getFile('binary')">Binary file</button>
-        <br>
-        <button onclick="getFile('text')">Text file</button>
-    </fieldset>
+    <h1>File download timer</h1>
+    <div class="container-column">
+        <div class="input-container">
+            <label for="length">File Size in bytes</label>
+            <input disabled type="number" min="0" max="5000000" id="length" value="20971520" step="1024"
+                onchange="updateBytes(this)">
+        </div>
+        <div class="input-container">
+            <label for="lengthKB">File Size in kilobytes</label>
+            <input type="number" min="0" max="5000000" id="lengthKB" value="20480" step="1024"
+                onchange="updateBytes(this)">
+        </div>
+        <div class="input-container">
+            <label for="lengthMB">File Size in megabytes</label>
+            <input type="number" min="0" max="5000000" id="lengthMB" value="20" step="1" onchange="updateBytes(this)">
+        </div>
+        <div class="input-container">
+            <button onclick="getFile('binary')">Binary file</button>
+        </div>
+        <div class="input-container">
+            <button onclick="getFile('text')">Text file</button>
+        </div>
+    </div>
     <progress id="progressBar" value=0 min=0 max=100></progress>
 
     <table id="resultsTable">
