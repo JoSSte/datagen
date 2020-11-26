@@ -4,6 +4,7 @@ body {
 }
 
 .container-column {
+	display: flex;
 	flex-direction: column;
 	margin: 10px auto;	
 }
@@ -11,6 +12,11 @@ body {
 .input-container {
 	display: flex;
 	margin: 0.2em;
+}
+
+.container {
+	display: flex;
+	justify-content:  center;
 }
 
 label {
@@ -27,7 +33,6 @@ input,button{
 progress {
 	width: 250px;
 	height: 14px;
-	display: block;
 	margin: 10px auto;	
 }
 

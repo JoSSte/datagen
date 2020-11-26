@@ -30,25 +30,29 @@
         <div class="input-container">
             <button onclick="getFile('text')">Text file</button>
         </div>
+
+        <div class="container">
+            <progress id="progressBar" value=0 min=0 max=100></progress>
+        </div>
+
+        <div class="input-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Bytes</th>
+                        <th>Total Time Taken</th>
+                        <th>Generation time</th>
+                        <th>Download Time</th>
+                        <th colspan=3>Speed</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTBody">
+
+                </tbody>
+            </table>
+        </div>
     </div>
-    <progress id="progressBar" value=0 min=0 max=100></progress>
-
-    <table id="resultsTable">
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Bytes</th>
-                <th>Total Time Taken</th>
-                <th>Generation time</th>
-                <th>Download Time</th>
-                <th colspan=3>Speed</th>
-            </tr>
-        </thead>
-        <tbody id="resultsTBody">
-
-        </tbody>
-    </table>
-
 </body>
 
 </html>
