@@ -59,7 +59,7 @@ function getFile(fType) {
     };
 
 
-    xhr.open('GET', "genfile.php?type=" + fType + "&length=" + fSize);
+    xhr.open('GET', "backend/genfile.php?type=" + fType + "&length=" + fSize);
     xhr.send();
 }
 
