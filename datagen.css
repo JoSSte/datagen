@@ -21,7 +21,7 @@ body {
 
 label {
 	color: #326691;
-	flex-grow: 2;
+	flex-grow: 1;
 }
 
 input,button{
