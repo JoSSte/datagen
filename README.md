@@ -28,6 +28,10 @@ I needed a way to compare wifi/wired connections across several devices, and by 
 * `-` High load because files aren't cached
 * `-` If your server (like mine was) is set up to serve over HTTPS instead of HTTP, you may not get accurate readings.
 
-**DO NOT put this PHP file on a public http server - it may be used for a DoS attack.**
+## Potential future enhancements
+* Other backends than PHP
+* Progressbar in table - replaced by result
+
+# **DO NOT put this PHP file on a public webserver - it may be used for a DoS attack.**
 
 

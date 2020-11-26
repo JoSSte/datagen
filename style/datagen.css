@@ -47,18 +47,29 @@ progress {
 	border-collapse: collapse;
 }
 
+#resultsTable th {
+	background-color: black;
+	color: white;
+	border: 1px solid black;
+}
+
+#resultsTable tfoot td {
+    background-color: white;
+	border: 1px solid white;
+}
+
 #resultsTable td, th {
     padding: 0.2em;
 }
 
 #resultsTable tbody tr:nth-child(odd) {
-    background-color: white;
+    background-color: rgb(240, 240, 250);
 }
 
 #resultsTable tbody tr:nth-child(even) {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(220, 220, 230);
 }
 
 #resultsTable tbody tr:hover {
-    background-color: rgba(119, 255, 149, 0.35);
+    background-color: rgba(119, 255, 149, 0.15);
 }

@@ -1,9 +1,13 @@
 
-let nf = new Intl.NumberFormat(navigator.language);
+let nf = new Intl.NumberFormat("en");
 
 function insertResultRow(type, bytes, timeTotal, timeGen) {
+    timeGen = parseInt(timeGen);
     let timeDL = timeTotal - timeGen;
-    let speed = Math.floor((bytes*8)/timeDL);
+    let speed = Math.round((bytes * 8) / timeDL);
+    let speedKB = Math.round(speed / 1024);
+    let speedMB = Math.round(speed / (1024 * 1024));
+
     let tbody = document.getElementById("resultsTBody");
     let newRow = document.createElement("tr");
     let typeCell = document.createElement("td");
@@ -17,11 +21,11 @@ function insertResultRow(type, bytes, timeTotal, timeGen) {
     let timeDLCell = document.createElement("td");
     timeDLCell.appendChild(document.createTextNode(nf.format(timeDL)));
     let speedBPSCell = document.createElement("td");
-    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed))));
+    speedBPSCell.appendChild(document.createTextNode(nf.format(speed)));
+    let speedKBPSCell = document.createElement("td");
+    speedKBPSCell.appendChild(document.createTextNode(nf.format(speedKB)));
     let speedMBPSCell = document.createElement("td");
-    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024))));
-    let speedGBPSCell = document.createElement("td");
-    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) ));
+    speedMBPSCell.appendChild(document.createTextNode(speedMB));
 
     newRow.appendChild(typeCell);
     newRow.appendChild(byteCell);
@@ -29,9 +33,33 @@ function insertResultRow(type, bytes, timeTotal, timeGen) {
     newRow.appendChild(timeGenCell);
     newRow.appendChild(timeDLCell);
     newRow.appendChild(speedBPSCell);
+    newRow.appendChild(speedKBPSCell);
     newRow.appendChild(speedMBPSCell);
-    newRow.appendChild(speedGBPSCell);
     tbody.appendChild(newRow);
+
+
+    // update mean values
+    let body = document.getElementById("resultsTBody");
+    let speedAvgCell = document.getElementById("speedAvgB")
+    let speedAvgKBCell = document.getElementById("speedAvgKB")
+    let speedAvgMBCell = document.getElementById("speedAvgMB")
+    let timeAvgDLCell = document.getElementById("timeAvgDL")
+
+    let numRows = body.childElementCount;
+
+    if (numRows == 1) {
+        //set initial values
+        speedAvgCell.innerText = speed;
+        speedAvgKBCell.innerText = speedKB;
+        speedAvgMBCell.innerText = speedMB;
+        timeAvgDLCell.innerText = timeDL;
+    } else {
+        //update existing cumulative average
+        speedAvgCell.innerText = nf.format(((parseFloat(speedAvgCell.innerText) * numRows) + speed) / (numRows + 1));
+        speedAvgKBCell.innerText = nf.format(((parseFloat(speedAvgKBCell.innerText) * numRows) + speedKB) / (numRows + 1));
+        speedAvgMBCell.innerText = nf.format(((parseFloat(speedAvgMBCell.innerText) * numRows) + speedMB) / (numRows + 1));
+        timeAvgDLCell.innerText = nf.format(((parseFloat(timeAvgDLCell.innerText) * numRows) + timeDL) / (numRows + 1));
+    }
 }
 
 function getFile(fType) {
@@ -46,11 +74,11 @@ function getFile(fType) {
         // Process our return data
         if (xhr.status == 200) {
             let endtime = Date.now();
-            let elapsed = (endtime - starttime)/1000;
+            let elapsed = (endtime - starttime) / 1000;
             let serverTiming = xhr.getResponseHeader("Server-Timing");
             let label = "gen;dur=";
-            let timeGen = serverTiming.substr(serverTiming.indexOf(label)+label.length,5);
-            console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: "+ timeGen);
+            let timeGen = serverTiming.substr(serverTiming.indexOf(label) + label.length, 5);
+            console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: " + timeGen);
             insertResultRow(fType, fSize, elapsed, timeGen);
         } else {
             // What do when the request fails
@@ -63,9 +91,10 @@ function getFile(fType) {
     xhr.send();
 }
 
-function updateProgress(evt){
-    if (evt.lengthComputable){ 
-        var percentComplete = (evt.loaded / evt.total) * 100;  
+//TODO: create tr with td colspan=* with progress element, and replace with results
+function updateProgress(evt) {
+    if (evt.lengthComputable) {
+        var percentComplete = (evt.loaded / evt.total) * 100;
         document.getElementById("progressBar").value = Math.floor(percentComplete);
         //console.log(nf.format(percentComplete));
     }
@@ -75,12 +104,12 @@ function updateProgress(evt){
  * 
  * @param {element this is called from} elem 
  */
-function updateBytes(elem){
+function updateBytes(elem) {
     console.log(elem.id);
-    switch(elem.id){
+    switch (elem.id) {
         case "length":
             document.getElementById("lengthKB").value = parseInt(elem.value) / 1024;
-            document.getElementById("lengthMB").value = parseInt(elem.value) / ( 1024 * 1024 );
+            document.getElementById("lengthMB").value = parseInt(elem.value) / (1024 * 1024);
             break;
         case "lengthKB":
             document.getElementById("length").value = parseInt(elem.value) * 1024;
@@ -88,7 +117,7 @@ function updateBytes(elem){
             break;
         case "lengthMB":
             document.getElementById("lengthKB").value = parseInt(elem.value) * 1024;
-            document.getElementById("length").value = parseInt(elem.value) * ( 1024 * 1024 );
+            document.getElementById("length").value = parseInt(elem.value) * (1024 * 1024);
             break;
     }
 
