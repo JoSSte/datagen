@@ -29,7 +29,7 @@ function insertResultRow(type, bytes, timeTotalMS, timeGen) {
     newRow.appendChild(timeTotalCell);
     newRow.appendChild(timeGenCell);
     newRow.appendChild(timeDLCell);
-    newRow.appendChild(speedBPSCell);
+    //newRow.appendChild(speedBPSCell);
     newRow.appendChild(speedMBPSCell);
     newRow.appendChild(speedGBPSCell);
     tbody.appendChild(newRow);
@@ -41,6 +41,7 @@ function getFile(fType) {
     let starttime = Date.now();
     let fSize = parseInt(document.getElementById("length").value);
     console.log("Requesting " + fSize + " bytes of " + fType + " data");
+    document.getElementById("progressBar").value = 0;
     xhr.onprogress = updateProgress;
     xhr.onload = function () {
         // Process our return data
