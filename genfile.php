@@ -3,10 +3,6 @@
 /**
  * Generates a file of arbritary size
  */
-
-define("TYPE_TEXT", "text/plain");
-define("TYPE_BINARY", "application/octet-stream");
-
 $gettype = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 $length = filter_input(INPUT_GET, 'length', FILTER_VALIDATE_INT, array("options" => array(
     "default" => 0
@@ -29,27 +25,23 @@ switch ($gettype) {
         break;
     case 'text':
         header("Content-Type: text/plain");
-        header("Content-Length: $length");
         header("Content-Disposition: attachment; filename=\"randomtext$length.txt\"");
         $data = "";
         $start = microtime(1);
         for ($i = 0; $i < $length; $i++) {
-            //echo chr(random_int(65, 122));
-            $data .= "0";
-        }
-        header("X-Generated-in-seconds: " . round(microtime(1) - $start, 5));
-        
+            $data .= chr(random_int(65, 122));
+            //$data .= "0";
+        }        
         break;
     case 'binary':
-        TYPE_BINARY;
         header("Content-Type: application/octet-stream");
-        header("Content-Length: $length");
         header("Content-Disposition: attachment; filename=\"randomdata$length.bin\"");
         $start = microtime(1);
         $data = random_bytes($length);
-        header("X-Generated-in-seconds: " . round(microtime(1) - $start, 5));
         break;
 }
 
+header("Content-Length: $length");
+header("Server-Timing: gen;dur=" . (round(microtime(1) - $start, 5)) );
 echo $data;
 

@@ -1,10 +1,9 @@
 
-let nf = new Intl.NumberFormat('en-GB');
+let nf = new Intl.NumberFormat(navigator.language);
 
-function insertResultRow(type, bytes, timeTotalMS, timeGen) {
-    let timeTotal = timeTotalMS / 1000;
+function insertResultRow(type, bytes, timeTotal, timeGen) {
     let timeDL = timeTotal - timeGen;
-    let speed = Math.floor(bytes/timeDL);
+    let speed = Math.floor((bytes*8)/timeDL);
     let tbody = document.getElementById("resultsTBody");
     let newRow = document.createElement("tr");
     let typeCell = document.createElement("td");
@@ -18,18 +17,18 @@ function insertResultRow(type, bytes, timeTotalMS, timeGen) {
     let timeDLCell = document.createElement("td");
     timeDLCell.appendChild(document.createTextNode(nf.format(timeDL) + "s"));
     let speedBPSCell = document.createElement("td");
-    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/8)) + "bps"));
+    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed)) + "bps"));
     let speedMBPSCell = document.createElement("td");
-    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/(8*1024))) + "Mbps"));
+    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024)) + "Mbps"));
     let speedGBPSCell = document.createElement("td");
-    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(8*1024*1024)) + "Gbps"));
+    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) + "Gbps"));
 
     newRow.appendChild(typeCell);
     newRow.appendChild(byteCell);
     newRow.appendChild(timeTotalCell);
     newRow.appendChild(timeGenCell);
     newRow.appendChild(timeDLCell);
-    //newRow.appendChild(speedBPSCell);
+    newRow.appendChild(speedBPSCell);
     newRow.appendChild(speedMBPSCell);
     newRow.appendChild(speedGBPSCell);
     tbody.appendChild(newRow);
@@ -47,8 +46,10 @@ function getFile(fType) {
         // Process our return data
         if (xhr.status == 200) {
             let endtime = Date.now();
-            let elapsed = endtime - starttime;
-            let timeGen = xhr.getResponseHeader("X-Generated-in-seconds");
+            let elapsed = (endtime - starttime)/1000;
+            let serverTiming = xhr.getResponseHeader("Server-Timing");
+            let label = "gen;dur=";
+            let timeGen = serverTiming.substr(serverTiming.indexOf(label)+label.length,5);
             console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: "+ timeGen);
             insertResultRow(fType, fSize, elapsed, timeGen);
         } else {
