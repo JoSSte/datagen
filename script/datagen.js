@@ -1,16 +1,22 @@
 
 let nf = new Intl.NumberFormat('en-GB');
 
-function insertResultRow(type, bytes, time) {
-    let speed = Math.floor(bytes/(time/1000));
+function insertResultRow(type, bytes, timeTotalMS, timeGen) {
+    let timeTotal = timeTotalMS / 1000;
+    let timeDL = timeTotal - timeGen;
+    let speed = Math.floor(bytes/timeDL);
     let tbody = document.getElementById("resultsTBody");
     let newRow = document.createElement("tr");
     let typeCell = document.createElement("td");
     typeCell.appendChild(document.createTextNode(type));
     let byteCell = document.createElement("td");
     byteCell.appendChild(document.createTextNode(nf.format(bytes)));
-    let timeCell = document.createElement("td");
-    timeCell.appendChild(document.createTextNode(nf.format(time) + "ms"));
+    let timeTotalCell = document.createElement("td");
+    timeTotalCell.appendChild(document.createTextNode(nf.format(timeTotal) + "s"));
+    let timeGenCell = document.createElement("td");
+    timeGenCell.appendChild(document.createTextNode(nf.format(timeGen) + "s"));
+    let timeDLCell = document.createElement("td");
+    timeDLCell.appendChild(document.createTextNode(nf.format(timeDL) + "s"));
     let speedBPSCell = document.createElement("td");
     speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/8)) + "bps"));
     let speedMBPSCell = document.createElement("td");
@@ -20,7 +26,9 @@ function insertResultRow(type, bytes, time) {
 
     newRow.appendChild(typeCell);
     newRow.appendChild(byteCell);
-    newRow.appendChild(timeCell);
+    newRow.appendChild(timeTotalCell);
+    newRow.appendChild(timeGenCell);
+    newRow.appendChild(timeDLCell);
     newRow.appendChild(speedBPSCell);
     newRow.appendChild(speedMBPSCell);
     newRow.appendChild(speedGBPSCell);
@@ -39,8 +47,9 @@ function getFile(fType) {
         if (xhr.status == 200) {
             let endtime = Date.now();
             let elapsed = endtime - starttime;
-            console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed);
-            insertResultRow(fType, fSize, elapsed);
+            let timeGen = xhr.getResponseHeader("X-Generated-in-seconds");
+            console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: "+ timeGen);
+            insertResultRow(fType, fSize, elapsed, timeGen);
         } else {
             // What do when the request fails
             console.log('send failed');

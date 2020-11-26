@@ -30,21 +30,26 @@ switch ($gettype) {
     case 'text':
         header("Content-Type: text/plain");
         header("Content-Length: $length");
-        header("Content-Disposition: attachment; filename=\"randomtext$length.bin\"");
-        ob_end_flush();
+        header("Content-Disposition: attachment; filename=\"randomtext$length.txt\"");
+        $data = "";
+        $start = microtime(1);
         for ($i = 0; $i < $length; $i++) {
             //echo chr(random_int(65, 122));
-            echo "0";
+            $data .= "0";
         }
+        header("X-Generated-in-seconds: " . round(microtime(1) - $start, 5));
+        
         break;
     case 'binary':
         TYPE_BINARY;
         header("Content-Type: application/octet-stream");
         header("Content-Length: $length");
         header("Content-Disposition: attachment; filename=\"randomdata$length.bin\"");
-        echo random_bytes($length);
+        $start = microtime(1);
+        $data = random_bytes($length);
+        header("X-Generated-in-seconds: " . round(microtime(1) - $start, 5));
         break;
 }
 
-
+echo $data;
 
