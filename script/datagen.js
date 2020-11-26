@@ -67,7 +67,7 @@ function updateProgress(evt){
     if (evt.lengthComputable){ 
         var percentComplete = (evt.loaded / evt.total) * 100;  
         document.getElementById("progressBar").value = Math.floor(percentComplete);
-        console.log(nf.format(percentComplete));
+        //console.log(nf.format(percentComplete));
     }
 }
 
