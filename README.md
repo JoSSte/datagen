@@ -24,15 +24,20 @@ Javascript and AJAX requests are used to call the PHP file generator, and the ti
 I needed a way to compare wifi/wired connections across several devices, and by creating this, all the devices I wanted to test could use it, and I know exactly where I am testing from and to.
 
 ## Pros & Cons
-* :heavy_plus_sign: Small footprint
-* :heavy_plus_sign: Works on all devices that can run modern browsers
-* :heavy_minus_sign: Potentially uses up all memory on your system
-* :heavy_minus_sign: High load because files aren't cached
-* :heavy_minus_sign: If your server (like mine was) is set up to serve over HTTPS instead of HTTP, you may not get accurate readings.
+:heavy_plus_sign: Small footprint
+
+:heavy_plus_sign: Works on all devices that can run modern browsers
+
+:heavy_minus_sign: Potentially uses up all memory on your system
+
+:heavy_minus_sign: High load because files aren't cached
+
+:heavy_minus_sign: If your server (like mine was) is set up to serve over HTTPS instead of HTTP, you may not get accurate readings.
 
 ## Potential future enhancements
-* Other backends than PHP
-* Progressbar in table - replaced by result
+:memo: Other backends than PHP
+
+:memo: Progressbar in table - replaced by result
 
 # **DO NOT put this PHP file on a public webserver - it may be used for a DoS attack.**
 
