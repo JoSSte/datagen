@@ -41,12 +41,18 @@
             <table id="resultsTable">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Bytes</th>
-                        <th>Total Time Taken</th>
-                        <th>Generation time</th>
-                        <th>Download Time</th>
+                        <th rowspan=2>Type</th>
+                        <th rowspan=2>Bytes</th>
+                        <th colspan=3>Time (s)</th>
                         <th colspan=3>Speed</th>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>Generation</th>
+                        <th>Download</th>
+                        <th>bit/s</th>
+                        <th>Kbit/s</th>
+                        <th>Mbit/s</th>
                     </tr>
                 </thead>
                 <tbody id="resultsTBody">

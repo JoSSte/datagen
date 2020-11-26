@@ -11,17 +11,17 @@ function insertResultRow(type, bytes, timeTotal, timeGen) {
     let byteCell = document.createElement("td");
     byteCell.appendChild(document.createTextNode(nf.format(bytes)));
     let timeTotalCell = document.createElement("td");
-    timeTotalCell.appendChild(document.createTextNode(nf.format(timeTotal) + "s"));
+    timeTotalCell.appendChild(document.createTextNode(nf.format(timeTotal)));
     let timeGenCell = document.createElement("td");
-    timeGenCell.appendChild(document.createTextNode(nf.format(timeGen) + "s"));
+    timeGenCell.appendChild(document.createTextNode(nf.format(timeGen)));
     let timeDLCell = document.createElement("td");
-    timeDLCell.appendChild(document.createTextNode(nf.format(timeDL) + "s"));
+    timeDLCell.appendChild(document.createTextNode(nf.format(timeDL)));
     let speedBPSCell = document.createElement("td");
-    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed)) + " bit/s"));
+    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed))));
     let speedMBPSCell = document.createElement("td");
-    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024)) + " Kbit/s"));
+    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024))));
     let speedGBPSCell = document.createElement("td");
-    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) + " Mbit/s"));
+    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) ));
 
     newRow.appendChild(typeCell);
     newRow.appendChild(byteCell);
