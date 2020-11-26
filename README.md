@@ -8,6 +8,8 @@ To use it, basically you:
 
 ## How it works
 
+![screenshot with sample](screenshot/2020-11-26_22-45_screenshot.png)
+
 ### Data generation
 For Binary files it relies on PHP's `random_bytes` function, which actually works quite fast to generate bytes of cryptographic data.
 
