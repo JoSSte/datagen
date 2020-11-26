@@ -17,11 +17,11 @@ function insertResultRow(type, bytes, timeTotal, timeGen) {
     let timeDLCell = document.createElement("td");
     timeDLCell.appendChild(document.createTextNode(nf.format(timeDL) + "s"));
     let speedBPSCell = document.createElement("td");
-    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed)) + "bps"));
+    speedBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed)) + " bit/s"));
     let speedMBPSCell = document.createElement("td");
-    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024)) + "Mbps"));
+    speedMBPSCell.appendChild(document.createTextNode(nf.format(Math.round(speed/1024)) + " Kbit/s"));
     let speedGBPSCell = document.createElement("td");
-    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) + "Gbps"));
+    speedGBPSCell.appendChild(document.createTextNode(Math.round(speed/(1024*1024)) + " Mbit/s"));
 
     newRow.appendChild(typeCell);
     newRow.appendChild(byteCell);
