@@ -3,6 +3,10 @@ body {
 	background: #ddd5e2;
 }
 
+h1 {
+	text-align:center;
+}
+
 .container-column {
 	display: flex;
 	flex-direction: column;
