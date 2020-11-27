@@ -37,8 +37,6 @@ I needed a way to compare wifi/wired connections across several devices, and by 
 ## Potential future enhancements
 :memo: Other backends than PHP
 
-:memo: Progressbar in table - replaced by result
-
 # **DO NOT put this PHP file on a public webserver - it may be used for a DoS attack.**
 
 
