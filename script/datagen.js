@@ -9,12 +9,13 @@ function insertResultRow(type, bytes, timeTotal, timeGen, currentRow) {
     let speedMB = Math.round(speed / (1024 * 1024));
 
     
+    let tbody = document.getElementById("resultsTBody");
     if(currentRow == 'undefined'){//if for some reason the currentRow is undefined, create a new row
         currentRow = document.createElement("tr");
     }else {//if exists, remove td wih progressbar
         currentRow.removeChild(currentRow.firstChild);
+        tbody.appendChild(currentRow);
     }
-    let tbody = document.getElementById("resultsTBody");
     let typeCell = document.createElement("td");
     typeCell.appendChild(document.createTextNode(type));
     let byteCell = document.createElement("td");
@@ -40,7 +41,6 @@ function insertResultRow(type, bytes, timeTotal, timeGen, currentRow) {
     currentRow.appendChild(speedBPSCell);
     currentRow.appendChild(speedKBPSCell);
     currentRow.appendChild(speedMBPSCell);
-    tbody.appendChild(currentRow);
 
 
     // update mean values
