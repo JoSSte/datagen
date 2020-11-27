@@ -6,7 +6,8 @@ body {
 .container-column {
 	display: flex;
 	flex-direction: column;
-	margin: 10px auto;	
+	margin: 10px auto;
+	width: 700px;
 }
 
 .input-container {
@@ -30,16 +31,11 @@ input,button{
 	border-radius: 0.3em;
 }
 
-progress {
-	width: 250px;
-	height: 14px;
-	margin: 10px auto;	
-}
-
 #resultsTable{
 	margin: 10px auto;	
 	border: 1px solid black;
 	border-radius: 5px;
+	width: 700px;
 }
 
 #resultsTable, #resultsTable  th, #resultsTable td{

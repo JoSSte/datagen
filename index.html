@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAEUlEQVR42mNkIAAYRxWMJAUAE5gAEdz4t9QAAAAASUVORK5CYII=">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg width='64' height='64' version='1.1' viewBox='0 0 16.933 16.933' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns#' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'><metadata><rdf:RDF><cc:Work rdf:about=''><dc:format>image/svg+xml</dc:format><dc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage'/><dc:title/></cc:Work></rdf:RDF></metadata><g transform='translate(0 -280.07)' fill='none' stroke='#858585' stroke-linecap='round'><path transform='rotate(123.86)' d='m238.97-164.66a5.963 5.9838 0 0 1-7.061 3.6264 5.963 5.9838 0 0 1-4.4035-6.6205 5.963 5.9838 0 0 1 6.046-5.1525' stroke-linejoin='round' stroke-width='.66'/><path d='m8.4663 282.37v3.878h2.5019' stroke-width='.66048'/><path d='m8.6739 290.26v5.8647l-3.2598-2.7833' stroke-linejoin='round' stroke-width='.66'/><path d='m11.961 293.34-3.2872 2.7833' stroke-width='.66'/></g></svg>">
+    <link rel="alternate icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAdiAAAHYgE4epnbAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAXRQTFRFAAAA////gICAqqqqgICAmZmZgICAjo6OgICAiYmJiIiIgICAgICAhYWFhYWFiYmJhISEhISEiIiIh4eHh4eHg4ODg4ODhoaGhoaGg4ODhYWFiIiIhYWFh4eHh4eHhISEhISEhoaGhISEhoaGhoaGhYWFhYWFhYWFhoaGhISEhISEhISEhoaGhISEhYWFhISEhISEhYWFhYWFhoaGhoaGhoaGhYWFhoaGhISEhISEhISEhYWFhoaGhoaGhISEhISEhISEhYWFhYWFhISEhoaGhYWFhoaGhoaGhYWFhYWFhYWFhYWFhISEhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhoaGhoaGhYWFhYWFhYWFhYWFhISEhYWFhoaGhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFF0FhswAAAHt0Uk5TAAECAwQFCAkKDQ8UFhcZGhsdHiAiIyUmKCksLzAzNTg6Ozw9P0FDRUpNT1FSVVZXWVpcXV9hYmdobHJzen6Bg4WGiouNjo+RlJabnZ6fo6eprK2ur7G4uru9xcfKz9DR1NjZ2tvc3uDh4uvs7u/w8vT19vf4+fr7/P3+xLvsZQAAAUVJREFUOMtjYEAGzALS0nxMDDgAs35QbjUQZPtrMWKT10gq8NYT4+SSMPQrjlfF1O5a4cwNpHl4gAS/Z4UdmiGMPllqYIaXF5jSzHNHVWCXJwth+PpCaKVCa2R56TItBlQFDEbFYkgKwgMZ0BUwhIUg5EWrZDEVKFcIwRXYxDFgKmBIsoIzQz2wKfAKgDMTLRAKSnNycrIVQEzLBLhohjGcKacLBNrsIKZpKlw0zRRb2JshFEQ4YFPgGA5nukRiUxDuBmcqVvJjyvOUKyOiKsUJU4F9GlLK0SkRgbJY1aAMwSIDZOXu0lCGQhUzhCHvhzVZMShVszDgBTRVIGzOCFfAZs2JqUAm358NqoAnKpMHixFS6dG8YAXiybGCWC3hi0mTBCpQzw3kwOEMjuAc22rzMnecuZOBybm6utQErzdtylQYSAMAP+A28Wy/SpsAAAAASUVORK5CYII=">
     <script src="script/datagen.js"></script>
     <link href="style/datagen.css" rel="stylesheet" type="text/css">
     <title>File download timer</title>
@@ -32,12 +33,7 @@
         <div class="input-container">
             <button onclick="getFile('text')">Text file</button>
         </div>
-
         <div class="container">
-            <progress id="progressBar" value=0 min=0 max=100></progress>
-        </div>
-
-        <div class="input-container">
             <table id="resultsTable">
                 <thead>
                     <tr>

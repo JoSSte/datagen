@@ -1,15 +1,20 @@
 
 let nf = new Intl.NumberFormat("en");
 
-function insertResultRow(type, bytes, timeTotal, timeGen) {
+function insertResultRow(type, bytes, timeTotal, timeGen, currentRow) {
     timeGen = parseInt(timeGen);
     let timeDL = timeTotal - timeGen;
     let speed = Math.round((bytes * 8) / timeDL);
     let speedKB = Math.round(speed / 1024);
     let speedMB = Math.round(speed / (1024 * 1024));
 
+    
+    if(currentRow == 'undefined'){//if for some reason the currentRow is undefined, create a new row
+        currentRow = document.createElement("tr");
+    }else {//if exists, remove td wih progressbar
+        currentRow.removeChild(currentRow.firstChild);
+    }
     let tbody = document.getElementById("resultsTBody");
-    let newRow = document.createElement("tr");
     let typeCell = document.createElement("td");
     typeCell.appendChild(document.createTextNode(type));
     let byteCell = document.createElement("td");
@@ -27,15 +32,15 @@ function insertResultRow(type, bytes, timeTotal, timeGen) {
     let speedMBPSCell = document.createElement("td");
     speedMBPSCell.appendChild(document.createTextNode(speedMB));
 
-    newRow.appendChild(typeCell);
-    newRow.appendChild(byteCell);
-    newRow.appendChild(timeTotalCell);
-    newRow.appendChild(timeGenCell);
-    newRow.appendChild(timeDLCell);
-    newRow.appendChild(speedBPSCell);
-    newRow.appendChild(speedKBPSCell);
-    newRow.appendChild(speedMBPSCell);
-    tbody.appendChild(newRow);
+    currentRow.appendChild(typeCell);
+    currentRow.appendChild(byteCell);
+    currentRow.appendChild(timeTotalCell);
+    currentRow.appendChild(timeGenCell);
+    currentRow.appendChild(timeDLCell);
+    currentRow.appendChild(speedBPSCell);
+    currentRow.appendChild(speedKBPSCell);
+    currentRow.appendChild(speedMBPSCell);
+    tbody.appendChild(currentRow);
 
 
     // update mean values
@@ -68,8 +73,14 @@ function getFile(fType) {
     let starttime = Date.now();
     let fSize = parseInt(document.getElementById("length").value);
     console.log("Requesting " + fSize + " bytes of " + fType + " data");
-    document.getElementById("progressBar").value = 0;
-    xhr.onprogress = updateProgress;
+    let progElem = createProgressElement();
+    xhr.onprogress = function (evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = (evt.loaded / evt.total) * 100;
+            progElem.value = Math.floor(percentComplete);
+            //console.log(nf.format(percentComplete));
+        }
+    };
     xhr.onload = function () {
         // Process our return data
         if (xhr.status == 200) {
@@ -79,7 +90,7 @@ function getFile(fType) {
             let label = "gen;dur=";
             let timeGen = serverTiming.substr(serverTiming.indexOf(label) + label.length, 5);
             console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: " + timeGen);
-            insertResultRow(fType, fSize, elapsed, timeGen);
+            insertResultRow(fType, fSize, elapsed, timeGen, progElem.parentElement.parentElement);
         } else {
             // What do when the request fails
             console.log('send failed');
@@ -91,13 +102,19 @@ function getFile(fType) {
     xhr.send();
 }
 
-//TODO: create tr with td colspan=* with progress element, and replace with results
-function updateProgress(evt) {
-    if (evt.lengthComputable) {
-        var percentComplete = (evt.loaded / evt.total) * 100;
-        document.getElementById("progressBar").value = Math.floor(percentComplete);
-        //console.log(nf.format(percentComplete));
-    }
+
+function createProgressElement(){
+    let newRow = document.createElement("tr");
+    let progressCell = document.createElement("td");
+    progressCell.colSpan = 8;
+    let progressElement = document.createElement("progress");
+    progressElement.max = 100;
+    progressElement.value = 0;
+    progressElement.style.width = "100%";
+    progressCell.appendChild(progressElement);
+    newRow.appendChild(progressCell);
+    document.getElementById("resultsTBody").appendChild(newRow);
+    return progressElement;
 }
 
 /**
