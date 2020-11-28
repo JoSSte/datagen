@@ -8,11 +8,11 @@ function insertResultRow(type, bytes, timeTotal, timeGen, currentRow) {
     let speedKB = Math.round(speed / 1024);
     let speedMB = Math.round(speed / (1024 * 1024));
 
-    
+
     let tbody = document.getElementById("resultsTBody");
-    if(currentRow == 'undefined'){//if for some reason the currentRow is undefined, create a new row
+    if (currentRow == 'undefined') {//if for some reason the currentRow is undefined, create a new row
         currentRow = document.createElement("tr");
-    }else {//if exists, remove td wih progressbar
+    } else {//if exists, remove td wih progressbar
         currentRow.removeChild(currentRow.firstChild);
         tbody.appendChild(currentRow);
     }
@@ -44,14 +44,12 @@ function insertResultRow(type, bytes, timeTotal, timeGen, currentRow) {
 
 
     // update mean values
-    let body = document.getElementById("resultsTBody");
     let speedAvgCell = document.getElementById("speedAvgB")
     let speedAvgKBCell = document.getElementById("speedAvgKB")
     let speedAvgMBCell = document.getElementById("speedAvgMB")
     let timeAvgDLCell = document.getElementById("timeAvgDL")
 
-    let numRows = body.childElementCount;
-
+    let numRows = tbody.childElementCount;
     if (numRows == 1) {
         //set initial values
         speedAvgCell.innerText = speed;
@@ -78,7 +76,6 @@ function getFile(fType) {
         if (evt.lengthComputable) {
             var percentComplete = (evt.loaded / evt.total) * 100;
             progElem.value = Math.floor(percentComplete);
-            //console.log(nf.format(percentComplete));
         }
     };
     xhr.onload = function () {
@@ -103,7 +100,7 @@ function getFile(fType) {
 }
 
 
-function createProgressElement(){
+function createProgressElement() {
     let newRow = document.createElement("tr");
     let progressCell = document.createElement("td");
     progressCell.colSpan = 8;
@@ -113,7 +110,10 @@ function createProgressElement(){
     progressElement.style.width = "100%";
     progressCell.appendChild(progressElement);
     newRow.appendChild(progressCell);
-    document.getElementById("resultsTBody").appendChild(newRow);
+
+    let tbody = document.getElementById("resultsTBody");
+    tbody.appendChild(newRow);
+    console.log(tbody.childElementCount);
     return progressElement;
 }
 

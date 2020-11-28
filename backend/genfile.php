@@ -12,13 +12,6 @@ if (ini_set('memory_limit', -1) === false) {
     error_log("cannot set memory limit");
   }
 
-//$memlimit = ini_get('memory_limit');
-//if ($length > $memlimit) {
-//    http_response_code(404);
-//    header("Content-Type: " . TYPE_TEXT);
-//    die("Memory limit of $memlimit exceeded. Please adjust parameters");
-//}
-
 switch ($gettype) {
     default:
         die( "This file generates files or arbritary sizes. Provide GET parameters type(text/binary) & length to customize");
@@ -28,10 +21,7 @@ switch ($gettype) {
         header("Content-Disposition: attachment; filename=\"randomtext$length.txt\"");
         $data = "";
         $start = microtime(1);
-        for ($i = 0; $i < $length; $i++) {
-            $data .= chr(random_int(65, 122));
-            //$data .= "0";
-        }        
+        $data = substr(base64_encode(random_bytes($length)),0,$length);     
         break;
     case 'binary':
         header("Content-Type: application/octet-stream");
