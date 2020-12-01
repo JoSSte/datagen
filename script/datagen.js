@@ -113,7 +113,6 @@ function createProgressElement() {
 
     let tbody = document.getElementById("resultsTBody");
     tbody.appendChild(newRow);
-    console.log(tbody.childElementCount);
     return progressElement;
 }
 
@@ -122,7 +121,6 @@ function createProgressElement() {
  * @param {element this is called from} elem 
  */
 function updateBytes(elem) {
-    console.log(elem.id);
     switch (elem.id) {
         case "length":
             document.getElementById("lengthKB").value = parseInt(elem.value) / 1024;
