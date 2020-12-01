@@ -5,12 +5,10 @@
  */
 $gettype = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 $length = filter_input(INPUT_GET, 'length', FILTER_VALIDATE_INT, array("options" => array(
-    "default" => 0
+    "default" => 5242880,  //5 mb
+    "min_range" => 0,
+    "max_range" => 52428800 // max filesize 50mb
 )));
-
-if (ini_set('memory_limit', -1) === false) {
-    error_log("cannot set memory limit");
-  }
 
 switch ($gettype) {
     default:

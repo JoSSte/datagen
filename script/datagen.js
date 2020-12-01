@@ -86,6 +86,11 @@ function getFile(fType) {
             let serverTiming = xhr.getResponseHeader("Server-Timing");
             let label = "gen;dur=";
             let timeGen = serverTiming.substr(serverTiming.indexOf(label) + label.length, 5);
+            let dlBytes=xhr.getResponseHeader("Content-Length");
+            if(dlBytes != fSize){
+                console.log("filesize adjusted");
+                fSize = dlBytes
+            }
             console.log("Type: " + fType + " length: " + fSize + " time: " + elapsed + " gentime: " + timeGen);
             insertResultRow(fType, fSize, elapsed, timeGen, progElem.parentElement.parentElement);
         } else {
@@ -113,7 +118,7 @@ function createProgressElement() {
 
     let tbody = document.getElementById("resultsTBody");
     tbody.appendChild(newRow);
-    console.log(tbody.childElementCount);
+    //console.log(tbody.childElementCount);
     return progressElement;
 }
 
