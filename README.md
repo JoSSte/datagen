@@ -1,3 +1,5 @@
+# :exclamation: ** Created to test speeds where you cannot use iperf ** :exclamation:
+
 # Download speed tester
 This project consists of a file generator which can do both text and binary files. 
 To use it, basically you: 
